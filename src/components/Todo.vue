@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody id="js-todo-tbody">
-        <tr v-for="(item) in this.$store.getters.storeGetTasks(this.todoFilter)" :key="item.id">
+        <tr v-for="(item) in getSortTasks" :key="item.id">
           <td>{{item.id}}</td>
           <td>{{item.comment}}</td>
           <td>
@@ -46,6 +46,12 @@ export default {
       inputTaskText: "",
       todoFilter: "すべて"
     };
+  },
+  // 算出プロパティ
+  computed: {
+    getSortTasks: function() {
+      return this.$store.getters.storeGetTasks(this.todoFilter);
+    }
   },
   methods: {
     // エンターでもタスクの追加ができるように
